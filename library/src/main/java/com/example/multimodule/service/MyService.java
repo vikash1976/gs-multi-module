@@ -10,6 +10,7 @@ public class MyService {
 	private final ServiceProperties serviceProperties;
 
 	public MyService(ServiceProperties serviceProperties) {
+		System.out.println("Test2");
 		this.serviceProperties = serviceProperties;
 	}
 
