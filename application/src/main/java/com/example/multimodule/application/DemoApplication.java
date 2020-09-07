@@ -15,6 +15,7 @@ public class DemoApplication {
 	public DemoApplication(MyService myService) {
 		System.out.println("Test1");
 		this.myService = myService;
+		System.out.println("Test3");
 	}
 
 	@GetMapping("/")
