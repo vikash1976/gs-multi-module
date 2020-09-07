@@ -13,6 +13,7 @@ public class DemoApplication {
 	private final MyService myService;
 
 	public DemoApplication(MyService myService) {
+		System.out.println("Test1");
 		this.myService = myService;
 	}
 
