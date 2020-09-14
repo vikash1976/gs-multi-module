@@ -25,9 +25,10 @@ pipeline {
                 script {
                     pom = readMavenPom file: "pom.xml";
                     if(pom.packaging == 'pom'){
-                    	echo "***** ${pom.modules} And ${pom.modules.length}"
-                    	pom.modules.each { moduleName ->
-                    		echo "Module ${moduleName}"
+	                    	echo "***** ${pom.modules} And ${pom.modules.length}"
+	                    	pom.modules.each { moduleName ->
+	                    		echo "Module ${moduleName}"
+                    	}
                     }
                     else {
 	                    filesByGlob = findFiles(glob: "target/*.${pom.packaging}");
