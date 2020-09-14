@@ -25,9 +25,40 @@ pipeline {
                 script {
                     pom = readMavenPom file: "pom.xml";
                     if(pom.packaging == 'pom'){
-	                    	echo "***** ${pom.modules} And ${pom.modules.length}"
+	                    	echo "***** ${pom.modules} And ${pom.modules.size()}"
 	                    	pom.modules.each { moduleName ->
-	                    		echo "Module ${moduleName}"
+	                    		echo "***** Processing module ${moduleName}"
+	                    		modulePom = readMavenPom file: "${moduleName}/pom.xml";
+	                    		
+	                    		filesByGlob = findFiles(glob: "${moduleName}/target/*.${modulePom.packaging}");
+			                    echo "***** ${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}"
+			                    artifactPath = filesByGlob[0].path;
+			                    artifactExists = fileExists artifactPath;
+			                    NEXUS_REPOSITORY = modulePom.version.endsWith('SNAPSHOT') ? NEXUS_SNAPSHOTS_REPOSITORY : NEXUS_RELEASES_REPOSITORY
+			                    if(artifactExists) {
+			                        echo "***** File: ${artifactPath}, group: ${modulePom.groupId}, packaging: ${modulePom.packaging}, version ${modulePom.version}";
+			                        nexusArtifactUploader(
+			                            nexusVersion: NEXUS_VERSION,
+			                            protocol: NEXUS_PROTOCOL,
+			                            nexusUrl: NEXUS_URL,
+			                            groupId: modulePom.groupId,
+			                            version: modulePom.version,
+			                            repository: NEXUS_REPOSITORY,
+			                            credentialsId: NEXUS_CREDENTIAL_ID,
+			                            artifacts: [
+			                                [artifactId: modulePom.artifactId,
+			                                classifier: '',
+			                                file: artifactPath,
+			                                type: modulePom.packaging],
+			                                [artifactId: modulePom.artifactId,
+			                                classifier: '',
+			                                file: "pom.xml",
+			                                type: "pom"]
+			                            ]
+			                        );
+			                    } else {
+			                        error "***** File: ${artifactPath}, could not be found";
+			                    }
                     	}
                     }
                     else {
