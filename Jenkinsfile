@@ -26,7 +26,7 @@ pipeline {
                     pom = readMavenPom file: "pom.xml";
                     if(pom.packaging == 'pom'){
                     	echo "***** ${pom.modules} And ${pom.modules.length}"
-                    	pom.modules.each(moduleName ->
+                    	pom.modules.each { moduleName ->
                     		echo "Module ${moduleName}"
                     }
                     else {
