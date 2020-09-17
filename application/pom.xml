@@ -65,7 +65,7 @@
 
 			<name>Maven Releases</name>
 
-			<url>http://localhost:8081/repository/maven-releases/</url>
+			<url>https://vikashartifactory.jfrog.io/artifactory/maven-releases/</url>
 
 			<layout>default</layout>
 
@@ -79,7 +79,7 @@
 
 			<name>Maven Snapshots</name>
 
-			<url>http://localhost:8081/repository/maven-snapshots/</url>
+			<url>https://vikashartifactory.jfrog.io/artifactory/maven-snapshots/</url>
 
 			<layout>default</layout>
 
