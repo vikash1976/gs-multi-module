@@ -61,7 +61,7 @@
 
 			<uniqueVersion>false</uniqueVersion>
 
-			<id>maven-releases</id>
+			<id>artifactory-releases</id>
 
 			<name>Maven Releases</name>
 
@@ -75,7 +75,7 @@
 
 			<uniqueVersion>true</uniqueVersion>
 
-			<id>maven-snapshots</id>
+			<id>artifactory-snapshots</id>
 
 			<name>Maven Snapshots</name>
 
