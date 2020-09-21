@@ -22,7 +22,7 @@ pipeline {
   
     stage("Publish to Nexus Repository Manager") {
             steps {
-               bat 'mvn deploy -Dmaven.test.skip=true -Djacoco.skip=true -Dpmd.skip=true -Dcpd.skip=true -Dspotbugs.skip=true -Dmaven.compiler.fork=true -Dmaven.compiler.executable="C:\\Eee\\jdk-11\\bin\\javac"' 
+               bat 'mvn deploy -X -Dmaven.test.skip=true -Djacoco.skip=true -Dpmd.skip=true -Dcpd.skip=true -Dspotbugs.skip=true -Dmaven.compiler.fork=true -Dmaven.compiler.executable="C:\\Eee\\jdk-11\\bin\\javac"' 
   }
 }
   }
